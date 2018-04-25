@@ -1,0 +1,113 @@
+<!-- Header -->
+<header class="header pb-9 pt-10" style="background-image: url(../assets/img/bg/4.jpg)">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1 class="fw-200 mb-6">New Ticket</h1>
+                <p class="lead-2">Create a service request or bug report or feature enhancement request </p>
+
+            </div>
+        </div>
+    </div>
+</header><!-- /.header -->
+
+
+<main class="main-content">
+
+    <section class="section">
+        <div class="container">
+            <h3 class="text-center mb-5" style="margin-top: -20px">Create a new Request</h3>
+            <div data-provide="shuffle">
+                <nav class="nav nav-center nav-pills mb-7" data-shuffle="filter">
+                    <a class="nav-link" href="#" data-shuffle="button" ng-click="selectType(1)" ng-class="{active:sr}">Service Request</a>
+                    <a class="nav-link" href="#" data-shuffle="button" ng-click="selectType(2)"  ng-class="{active:bug}">Bug Report</a>
+                    <a class="nav-link" href="#" data-shuffle="button" ng-click="selectType(3)"  ng-class="{active:feature}">Feature enhancement</a>
+                </nav>
+            </div>
+            <form ng-submit="createTicket()">
+            <div class="row">
+                <div class="col-12 col-md-6">
+
+
+                    <div class="form-group">
+                        <label>Ticker Number</label>
+                        <input class="form-control" type="text" placeholder="Ticker Number" ng-model="ticketNumber" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input class="form-control" type="text" placeholder="Title" ng-model="title" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Teams</label>
+                        <select class="form-control form-control-sm" required ng-model="team">
+                            <option value="IT">IT</option>
+                            <option value="Sales">Sales</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Short Description</label>
+                        <textarea class="form-control" rows="7" placeholder="Short Description" ng-model="description" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Priority</label>
+                        <div class="custom-controls-stacked">
+                            <label class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" name="radio1" ng-model="priority" value="1">
+                                <span class="custom-control-label">High</span>
+                            </label>
+
+                            <label class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" name="radio1" ng-model="priority" value="2">
+                                <span class="custom-control-label">Medium</span>
+                            </label>
+
+                            <label class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" name="radio1" ng-model="priority" value="3">
+                                <span class="custom-control-label">Low</span>
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" id="createProjectButton">
+                        <button class="btn btn-success" type="submit">Create Ticket</button>
+                    </div>
+
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <img ng-src="{{currentPic}}" alt="project image">
+
+                    <ul class="project-detail" style="margin-top: 20px">
+                        <li>
+                            <strong>Created by</strong>
+                            {{$root.user.displayName}}
+                        </li>
+
+                        <li>
+                            <strong>Date</strong>
+                            {{currentDate | date: "MMM d, y h:mm a"}}
+                        </li>
+
+                        <li>
+                            <strong>Area</strong>
+                            {{type}}
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+            </form>
+
+        </div>
+    </section>
+    
+    
+</main> 
