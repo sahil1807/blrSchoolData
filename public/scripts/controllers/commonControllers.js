@@ -24,8 +24,7 @@ srticket.controller('IndexController', ['$http', '$scope', '$stateParams', '$sta
                 $rootScope.windowLoaded = true;
             })
         } else {
-            if($state.current.name == 'create' || $state.current.name == 'editProject')
-                $state.go('app')
+            $rootScope.windowLoaded = true;
         }
     });
 
