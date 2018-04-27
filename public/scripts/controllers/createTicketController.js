@@ -1,4 +1,4 @@
-srticket.controller('CreateTicketController', ['$http', '$scope', '$stateParams', '$state', '$rootScope', '$compile', 'ENV', function ($http, $scope, $stateParams, $state, $rootScope, $compile, ENV) {
+srticket.controller('CreateTicketController', ['$http', '$scope', '$stateParams', '$state', '$rootScope', '$compile', 'ENV', 'TicketService' ,  function ($http, $scope, $stateParams, $state, $rootScope, $compile, ENV , TicketService) {
 
     $scope.currentDate = new Date();
     $scope.type = 'ServiceRequest';
@@ -69,15 +69,7 @@ srticket.controller('CreateTicketController', ['$http', '$scope', '$stateParams'
 
         };
 
-        $http.post('/ticket/createTicket', data).then(function (response) {
-            $rootScope.userInfo = response.data.userInfo;
-            $scope.loading = false;
-            $state.go('app.myTickets')
-
-
-        }, function (error) {
-            console.log(error);
-        })
+        TicketService.createTicket(data);
     }
 
 

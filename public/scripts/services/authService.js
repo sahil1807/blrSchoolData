@@ -151,4 +151,9 @@ srticket.service('AuthService', ['$rootScope', '$http', '$window', '$state', '$s
         });
     }
 
+
+    this.updateUser = function () {
+        return  $http.post('/users/revalidate', $rootScope.user);
+    }
+
 }]);

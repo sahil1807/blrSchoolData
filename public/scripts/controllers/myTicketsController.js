@@ -1,4 +1,4 @@
-srticket.controller('MyTicketsController', ['$http', '$scope', '$stateParams', '$state', '$rootScope', '$compile' ,  'ENV' , function ($http, $scope, $stateParams, $state, $rootScope , $compile , ENV) {
+srticket.controller('MyTicketsController', ['$http', '$scope', '$stateParams', '$state', '$rootScope', '$compile' ,  'ENV' , 'AuthService' ,  function ($http, $scope, $stateParams, $state, $rootScope , $compile , ENV , AuthService) {
 
     $scope.all = true;
     $scope.sr = false;
@@ -7,17 +7,17 @@ srticket.controller('MyTicketsController', ['$http', '$scope', '$stateParams', '
 
     $scope.init = function () {
         if($rootScope.user) {
-            $http.post('/users/revalidate', $rootScope.user).then(function (res) {
-                $rootScope.userInfo = res.data.userInfo;
-                window.localStorage.setItem(ENV.localStorageVariable, JSON.stringify($rootScope.user));
-                $rootScope.isLoggedIn = true;
-                $rootScope.windowLoaded = true;
+            AuthService.updateUser()
+                .then(function (res) {
+                    $rootScope.userInfo = res.data.userInfo;
+                    window.localStorage.setItem(ENV.localStorageVariable, JSON.stringify($rootScope.user));
+                    $rootScope.isLoggedIn = true;
+                    $rootScope.windowLoaded = true;
 
-                console.log($rootScope.userInfo);
-                $scope.tickets = $rootScope.userInfo.tickets;
-            }, function (error) {
-                console.log(error);
-            });
+                    $scope.tickets = $rootScope.userInfo.tickets;
+                }, function (error) {
+                    $scope.status = 'Unable to load all tickets data: ' + error.message;
+                });
         }
         else {
             $state.go('app')
@@ -29,7 +29,6 @@ srticket.controller('MyTicketsController', ['$http', '$scope', '$stateParams', '
         $scope.myFilter = {type : typeSelected};
         switch (typeSelected) {
             case '':
-                console.log(typeSelected);
                 $scope.all = true;
                 $scope.sr = false;
                 $scope.bug = false;

@@ -1,20 +1,21 @@
-srticket.controller('AllTicketsController', ['$http', '$scope', '$stateParams', '$state', '$rootScope', '$compile' ,  'ENV' , function ($http, $scope, $stateParams, $state, $rootScope , $compile , ENV) {
+srticket.controller('AllTicketsController', ['$http', '$scope', '$stateParams', '$state', '$rootScope', '$compile' ,  'ENV' , 'TicketService',  function ($http, $scope, $stateParams, $state, $rootScope , $compile , ENV , TicketService) {
 
-    $http.get('/ticket/getAllTickets').then(function (res) {
-        $rootScope.isLoggedIn = true;
-        $rootScope.windowLoaded = true;
-
-        $scope.tickets = res.data;
-
-        $scope.currentPage = 0;
-        $scope.pageSize = 10;
-        $scope.numberOfPages=function(){
-            return Math.ceil($scope.tickets.length/$scope.pageSize);
-        }
-
-    }, function (error) {
-        console.log(error);
-    });
+    $scope.currentPage = 0;
+    $scope.pageSize = 10;
+    getTickets();
+    function getTickets() {
+        TicketService.getAlltickets()
+            .then(function (response) {
+                $scope.tickets = response.data;
+                $rootScope.isLoggedIn = true;
+                $rootScope.windowLoaded = true;
+                $scope.numberOfPages=function(){
+                    return Math.ceil($scope.tickets.length/$scope.pageSize);
+                }
+            }, function (error) {
+                $scope.status = 'Unable to load customer data: ' + error.message;
+            });
+    }
 
     $scope.typeSort = function (typeSelected) {
         $scope.myFilter = {type : typeSelected};
@@ -26,7 +27,6 @@ srticket.controller('AllTicketsController', ['$http', '$scope', '$stateParams', 
                 $scope.feature = false;
                 break;
             case 'ServiceRequest':
-                console.log(typeSelected);
                 $scope.all = false;
                 $scope.sr = true;
                 $scope.bug = false;
