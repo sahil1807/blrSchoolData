@@ -1,8 +1,7 @@
-var srticket = angular.module('srticket', ['ui.router', 'angular-medium-editor', 'angular-medium-editor-insert-plugin']);
+let blrData = angular.module('blrData', ['ui.router', 'angular-medium-editor', 'angular-medium-editor-insert-plugin']);
 
-srticket.constant('ENV',
+blrData.constant('ENV',
     // Production
-
 
     {
         'apiEndPoint': 'http://localhost:3000/',
@@ -16,7 +15,7 @@ srticket.constant('ENV',
     }
 );
 
-srticket.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+blrData.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $stateProvider
 
         .state('app',{
@@ -79,38 +78,15 @@ srticket.config(function ($stateProvider, $urlRouterProvider, $locationProvider)
             }
         })
 
-
-        .state('app.create',{
-            url:'create',
+        .state('app.schoolData',{
+            url:'schoolData',
             views: {
                 'content@': {
-                    templateUrl: 'views/createTicket.html',
-                    controller: 'CreateTicketController'
+                    templateUrl: 'views/school-data.html',
+                    controller: 'SchoolDataController'
                 }
             }
-        })
-
-        .state('app.myTickets',{
-            url:'mytickets',
-            views: {
-                'content@': {
-                    templateUrl: 'views/myTickets.html',
-                    controller: 'MyTicketsController'
-                }
-            }
-        })
-        .state('app.allTickets',{
-            url:'alltickets',
-            views: {
-                'content@': {
-                    templateUrl: 'views/allTickets.html',
-                    controller: 'AllTicketsController'
-                }
-            }
-        })
-
-
-    ;
+        });
 
     $locationProvider.html5Mode({
         enabled: true

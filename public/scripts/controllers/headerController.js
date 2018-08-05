@@ -1,4 +1,4 @@
-srticket.controller('HeaderController', ['$http', '$scope', '$stateParams', '$state', '$rootScope', '$transitions', 'AuthService', function ($http, $scope, $stateParams, $state, $rootScope, $transitions, AuthService) {
+blrData.controller('HeaderController', ['$http', '$scope', '$stateParams', '$state', '$rootScope', '$transitions', 'AuthService', function ($http, $scope, $stateParams, $state, $rootScope, $transitions, AuthService) {
 
     $scope.currentState = $state.current.name;
     

@@ -1,4 +1,4 @@
-srticket.controller('IndexController', ['$http', '$scope', '$stateParams', '$state', '$rootScope', 'ENV', function ($http, $scope, $stateParams, $state, $rootScope, ENV) {
+blrData.controller('IndexController', ['$http', '$scope', '$stateParams', '$state', '$rootScope', 'ENV', function ($http, $scope, $stateParams, $state, $rootScope, ENV) {
 
     var config = {
         apiKey: ENV.firebaseApiKey,
@@ -31,7 +31,7 @@ srticket.controller('IndexController', ['$http', '$scope', '$stateParams', '$sta
 }]);
 
 
-srticket.controller('ForgotPasswdController', ['$http', '$scope', '$stateParams', '$state', '$rootScope', function ($http, $scope, $stateParams, $state, $rootScope) {
+blrData.controller('ForgotPasswdController', ['$http', '$scope', '$stateParams', '$state', '$rootScope', function ($http, $scope, $stateParams, $state, $rootScope) {
 
     var auth = firebase.auth();
 
@@ -68,7 +68,7 @@ srticket.controller('ForgotPasswdController', ['$http', '$scope', '$stateParams'
 }]);
 
 
-srticket.controller('FooterController', ['$http', '$scope', '$stateParams', '$state', '$rootScope', function ($http, $scope, $stateParams, $state, $rootScope) {
+blrData.controller('FooterController', ['$http', '$scope', '$stateParams', '$state', '$rootScope', function ($http, $scope, $stateParams, $state, $rootScope) {
     
 }]);
 

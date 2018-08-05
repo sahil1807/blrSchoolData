@@ -1,4 +1,4 @@
-srticket.controller('LoginController', ['$http', '$scope', '$stateParams', '$state', '$rootScope', 'AuthService', function ($http, $scope, $stateParams, $state, $rootScope, AuthService) {
+blrData.controller('LoginController', ['$http', '$scope', '$stateParams', '$state', '$rootScope', 'AuthService', function ($http, $scope, $stateParams, $state, $rootScope, AuthService) {
     
 
     $scope.submitAttempt = false;

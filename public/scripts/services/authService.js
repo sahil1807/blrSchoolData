@@ -1,4 +1,4 @@
-srticket.service('AuthService', ['$rootScope', '$http', '$window', '$state', '$stateParams', 'ENV', function ($rootScope, $http, $window, $state, $stateParam, ENV) {
+blrData.service('AuthService', ['$rootScope', '$http', '$window', '$state', '$stateParams', 'ENV', function ($rootScope, $http, $window, $state, $stateParam, ENV) {
 
     this.createUserWithEmailAndPassword = function (scope) {
         firebase.auth().createUserWithEmailAndPassword(scope.email, scope.password)

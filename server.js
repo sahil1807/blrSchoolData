@@ -1,21 +1,21 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('./logger');
-var mongoose = require('mongoose');
-var promise = require('bluebird');
-var config = require('./config');
-var cors = require('cors');
-var compression = require('compression');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('./logger');
+const mongoose = require('mongoose');
+const promise = require('bluebird');
+const config = require('./config');
+const cors = require('cors');
+const compression = require('compression');
 
-var usersRouter = require('./routes/users');
-var ticketRouter = require('./routes/tickets');
+const usersRouter = require('./routes/users');
+const schoolDataRouter = require('./routes/schoolData');
 
 
 mongoose.Promise = promise;
 
-var db_settings = {
+const db_settings = {
     reconnectTries : Number.MAX_VALUE,
     autoReconnect : true,
     keepAlive: 1,
@@ -24,10 +24,10 @@ var db_settings = {
 
     mongoose.connect(config.devDb, {reconnectTries : Number.MAX_VALUE, autoReconnect : true});
 
-    var db = mongoose.connection;
+    let db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection-error'));
     db.once('open', function () {
-        console.log('Connected to sr-ticket devDb');
+        console.log('Connected to devDb');
     });
 
     db.on('disconnected', function() {
@@ -36,9 +36,13 @@ var db_settings = {
         mongoose.connect(config.devDb,db_settings);
     });
 
-var app = express();
+const initData = require('./initData');
+initData.init();
+
+const app = express();
 app.use(cors());
 app.use(compression());
+app.set('view engine', 'html');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -47,7 +51,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/users', usersRouter);
-app.use('/ticket', ticketRouter);
+app.use('/schoolData', schoolDataRouter);
 
 app.get('*', function(req, res) {
     res.sendFile(__dirname + '/public/index.html');
